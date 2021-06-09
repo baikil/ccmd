@@ -12,7 +12,7 @@ if not "%1" == "" call :%1 %2 %3 & exit /b
 title %appn% [v%appv%] - %page%
 call :download %rawurl%ver ver
 set /p cver=<ver
-if %appv% leq %cver% set page=Update
+if %appv% lss %cver% set page=Update
 goto %page%
 
 :Update
@@ -20,8 +20,9 @@ title %appn% [v%appv%] - %page%
 echo Updating from [%appv%] to [%cver%] ...
 echo.
 echo The program will restart when the update is completed
+pause
 call :download %rawurl%c.cmd c.cmd
-start %0 & exit
+start c.cmd & exit
 
 :Menu
 cls

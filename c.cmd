@@ -3,7 +3,7 @@
 @echo off
 set page=Menu
 set "appn=ccmd"
-set appv=2
+set appv=3
 set "rawurl=https://raw.githubusercontent.com/baikil/ccmd/main/"
 if not "%1" == "" call :%1 %2 %3 & exit /b
 ::::::::::::::::::::::::::::::::::::
@@ -12,12 +12,16 @@ if not "%1" == "" call :%1 %2 %3 & exit /b
 title %appn% [v%appv%] - %page%
 call :download %rawurl%ver ver
 set /p cver=<ver
-if not %appv% == %cver% goto :Update
-goto :Menu 
+if %appv% leq %cver% set page=Update
+goto %page%
 
 :Update
-echo UPDATE PROCESS
-pause
+title %appn% [v%appv%] - %page%
+echo Updating from [%appv%] to [%cver%] ...
+echo.
+echo The program will restart when the update is completed
+call :download %rawurl%c.cmd c.cmd
+start %0 & exit
 
 :Menu
 cls

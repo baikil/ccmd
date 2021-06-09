@@ -1,14 +1,23 @@
 ::::::::::::::::::::::::::::::::::::
 ::Initiation
 @echo off
-if not "%1" == "" call :%1 %2 %3 & exit /b
 set page=Menu
 set "appn=ccmd"
-set /p appv=<ver
+set /p appv=2
+set "rawurl=https://raw.githubusercontent.com/baikil/ccmd/main/"
+if not "%1" == "" call :%1 %2 %3 & exit /b
 ::::::::::::::::::::::::::::::::::::
 
 :AutoUpdater
+title %appn% [v%appv%] - %page%
+call :download %rawurl%ver ver
+set /p cver=<ver
+if not %appv% == %cver% goto :Update
+goto :Menu 
 
+:Update
+echo UPDATE PROCESS
+pause
 
 :Menu
 cls
@@ -27,6 +36,9 @@ goto %page%
 exit
 
 :Debug
+echo DEBUG PAGE
+pause /n
+goto Menu
 
 ::::::::::::::::::::::::::::::::::::
 ::Functions [input] > output

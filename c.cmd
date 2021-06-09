@@ -3,7 +3,7 @@
 @echo off
 set page=Menu
 set "appn=ccmd"
-set /p appv=2
+set appv=2
 set "rawurl=https://raw.githubusercontent.com/baikil/ccmd/main/"
 if not "%1" == "" call :%1 %2 %3 & exit /b
 ::::::::::::::::::::::::::::::::::::
